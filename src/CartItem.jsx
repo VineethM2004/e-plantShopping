@@ -5,8 +5,14 @@ import './CartItem.css';
 
 const CartItem = ({ onContinueShopping, onRemoveFromCart }) => {
   const [checkoutMessage, setCheckoutMessage] = useState('');
+  const [paymentMode, setPaymentMode] = useState('creditCard');
+  const [userDetails, setUserDetails] = useState({ name: '', email: '' });
 
   const handleCheckoutClick = () => {
+    if (!userDetails.name || !userDetails.email) {
+      alert("Please fill in your details before checking out.");
+      return;
+    }
     setCheckoutMessage('Thank you for shopping!');
   };
 
@@ -81,7 +87,35 @@ const CartItem = ({ onContinueShopping, onRemoveFromCart }) => {
               </div>
             ))}
           </div>
-          <div style={{ marginTop: '20px', color: 'black' }} className="total_cart_amount"></div>
+
+          <div className="payment-details" style={{ marginTop: '20px' }}>
+            <h3>Payment Details</h3>
+            <label>
+              Name:
+              <input
+                type="text"
+                value={userDetails.name}
+                onChange={(e) => setUserDetails({ ...userDetails, name: e.target.value })}
+              />
+            </label>
+            <label>
+              Email:
+              <input
+                type="email"
+                value={userDetails.email}
+                onChange={(e) => setUserDetails({ ...userDetails, email: e.target.value })}
+              />
+            </label>
+            <label>
+              Payment Mode:
+              <select value={paymentMode} onChange={(e) => setPaymentMode(e.target.value)}>
+                <option value="creditCard">Credit Card</option>
+                <option value="paypal">PayPal</option>
+                <option value="bankTransfer">Bank Transfer</option>
+              </select>
+            </label>
+          </div>
+
           <button className="product-button" onClick={onContinueShopping}>
             Continue Shopping
           </button>
