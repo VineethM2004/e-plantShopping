@@ -108,6 +108,13 @@ function ProductList() {
           cost: "$30",
           added: false,
         },
+        {
+          name: "Chrysanthemum",
+          image: "https://cdn.pixabay.com/photo/2017/08/30/07/22/chrysanthemum-2698591_1280.jpg",
+          description: "Bright blooms that symbolize happiness.",
+          cost: "$9",
+          added: false,
+        },
       ],
     },
     {
@@ -148,6 +155,13 @@ function ProductList() {
           cost: "$5",
           added: false,
         },
+        {
+          name: "Zebra Plant",
+          image: "https://cdn.pixabay.com/photo/2016/12/16/09/51/zebra-1911142_1280.jpg",
+          description: "Unique stripes add visual interest.",
+          cost: "$10",
+          added: false,
+        },
       ],
     },
     {
@@ -186,6 +200,13 @@ function ProductList() {
           image: "https://cdn.pixabay.com/photo/2015/12/08/00/34/rubber-1806622_1280.jpg",
           description: "Easy to care for and can grow quite tall.",
           cost: "$15",
+          added: false,
+        },
+        {
+          name: "Chinese Evergreen",
+          image: "https://cdn.pixabay.com/photo/2016/10/14/22/56/chinese-1738450_1280.jpg",
+          description: "Tolerates low light and purifies the air.",
+          cost: "$18",
           added: false,
         },
       ],
