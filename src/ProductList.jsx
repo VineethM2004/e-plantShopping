@@ -6,7 +6,6 @@ import CartItem from "./CartItem";
 
 function ProductList() {
   const [showCart, setShowCart] = useState(false);
-  const [showPlants, setShowPlants] = useState(false);
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -16,59 +15,12 @@ function ProductList() {
   );
 
   const [plantsArray, setPlantsArray] = useState([
-    {
-      category: "Air Purifying Plants",
-      plants: [
-        {
-          name: "Snake Plant",
-          image: "https://cdn.pixabay.com/photo/2021/01/22/06/04/snake-plant-5939187_1280.jpg",
-          description: "Produces oxygen at night, improving air quality.",
-          cost: "$15",
-          added: false,
-        },
-        {
-          name: "Spider Plant",
-          image: "https://cdn.pixabay.com/photo/2018/07/11/06/47/chlorophytum-3530413_1280.jpg",
-          description: "Filters formaldehyde and xylene from the air.",
-          cost: "$12",
-          added: false,
-        },
-        {
-          name: "Peace Lily",
-          image: "https://cdn.pixabay.com/photo/2019/06/12/14/14/peace-lilies-4269365_1280.jpg",
-          description: "Removes mold spores and purifies the air.",
-          cost: "$18",
-          added: false,
-        },
-        {
-          name: "Boston Fern",
-          image: "https://cdn.pixabay.com/photo/2020/04/30/19/52/boston-fern-5114414_1280.jpg",
-          description: "Adds humidity to the air and removes toxins.",
-          cost: "$20",
-          added: false,
-        },
-        {
-          name: "Rubber Plant",
-          image: "https://cdn.pixabay.com/photo/2020/02/15/11/49/flower-4850729_1280.jpg",
-          description: "Easy to care for and effective at removing toxins.",
-          cost: "$17",
-          added: false,
-        },
-        {
-          name: "Aloe Vera",
-          image: "https://cdn.pixabay.com/photo/2018/04/02/07/42/leaf-3283175_1280.jpg",
-          description: "Purifies the air and has healing properties for skin.",
-          cost: "$14",
-          added: false,
-        },
-      ],
-    },
-    // Other categories...
+    // Existing plant categories...
   ]);
 
   const styleObj = {
     backgroundColor: "#4CAF50",
-    color: "#fff",
+    color: "#fff!important",
     padding: "15px",
     display: "flex",
     justifyContent: "space-between",
@@ -92,18 +44,10 @@ function ProductList() {
   const handleCartClick = (e) => {
     e.preventDefault();
     setShowCart(true);
-    setShowPlants(false);
   };
 
   const handlePlantsClick = (e) => {
     e.preventDefault();
-    setShowPlants(true);
-    setShowCart(false);
-  };
-
-  const handleContinueShopping = (e) => {
-    e.preventDefault();
-    setShowPlants(true);
     setShowCart(false);
   };
 
@@ -111,7 +55,6 @@ function ProductList() {
     const plant = plantsArray[plantCategoryIndex].plants[plantIndex];
     dispatch(addItem(plant));
 
-    // Update the button state immutably
     setPlantsArray((prevPlantsArray) => {
       return prevPlantsArray.map((category, catIndex) => {
         if (catIndex === plantCategoryIndex) {
@@ -189,6 +132,7 @@ function ProductList() {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth="2"
+                    id="mainIconPathAttribute"
                   ></path>
                 </svg>
                 {totalItemsInCart > 0 && (
@@ -229,10 +173,17 @@ function ProductList() {
           ))}
         </div>
       ) : (
-        <CartItem
-          onRemoveFromCart={handleRemoveFromCart}
-          onContinueShopping={handleContinueShopping}
-        />
+        <div style={{ padding: '20px' }}>
+          <h2 style={{ fontSize: '24px' }}>Cart Items</h2>
+          {/* Replace with your cart item rendering */}
+          <CartItem
+            onRemoveFromCart={handleRemoveFromCart}
+            onContinueShopping={handleContinueShopping}
+          />
+          <div style={{ fontSize: '20px' }}>Name: [Your Name Here]</div>
+          <div style={{ fontSize: '20px' }}>Email: [Your Email Here]</div>
+          <div style={{ fontSize: '20px' }}>Payment Mode: [Your Payment Mode]</div>
+        </div>
       )}
     </div>
   );
