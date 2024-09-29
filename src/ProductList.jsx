@@ -6,6 +6,7 @@ import CartItem from "./CartItem";
 
 function ProductList() {
   const [showCart, setShowCart] = useState(false);
+  const [activeTab, setActiveTab] = useState("plants"); // State for active tab
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.items);
 
@@ -84,35 +85,35 @@ function ProductList() {
   const [toolsArray, setToolsArray] = useState([
     {
       name: "Garden Spade",
-      image: "https://cdn.pixabay.com/photo/2017/06/05/18/34/garden-tools-2375795_1280.jpg", // Updated example URL
+      image: "https://cdn.pixabay.com/photo/2017/06/05/18/34/garden-tools-2375795_1280.jpg",
       description: "Perfect for digging and planting.",
       cost: "$25",
       added: false,
     },
     {
       name: "Pruning Shears",
-      image: "https://cdn.pixabay.com/photo/2015/04/19/08/13/pruning-shears-731559_1280.jpg", // Updated example URL
+      image: "https://cdn.pixabay.com/photo/2015/04/19/08/13/pruning-shears-731559_1280.jpg",
       description: "Ideal for trimming and shaping plants.",
       cost: "$20",
       added: false,
     },
     {
       name: "Garden Hose",
-      image: "https://cdn.pixabay.com/photo/2015/04/19/08/16/garden-hose-731568_1280.jpg", // Updated example URL
+      image: "https://cdn.pixabay.com/photo/2015/04/19/08/16/garden-hose-731568_1280.jpg",
       description: "Durable and flexible for all your watering needs.",
       cost: "$30",
       added: false,
     },
     {
       name: "Rake",
-      image: "https://cdn.pixabay.com/photo/2016/04/20/18/12/rake-1331437_1280.jpg", // Updated example URL
+      image: "https://cdn.pixabay.com/photo/2016/04/20/18/12/rake-1331437_1280.jpg",
       description: "Great for leveling soil and gathering debris.",
       cost: "$18",
       added: false,
     },
     {
       name: "Trowel",
-      image: "https://cdn.pixabay.com/photo/2016/04/20/18/09/trowel-1331431_1280.jpg", // Updated example URL
+      image: "https://cdn.pixabay.com/photo/2016/04/20/18/09/trowel-1331431_1280.jpg",
       description: "Essential for planting and transplanting.",
       cost: "$10",
       added: false,
@@ -123,7 +124,6 @@ function ProductList() {
     const item = itemArray[itemIndex];
     dispatch(addItem(item));
 
-    // Update the button state immutably
     if (itemArray === plantsArray) {
       setPlantsArray((prevPlantsArray) => {
         return prevPlantsArray.map((category) => {
@@ -182,10 +182,10 @@ function ProductList() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "1100px" }}>
           <div>
-            <a href="#" onClick={(e) => { e.preventDefault(); }} style={{ color: "white", fontSize: "30px", textDecoration: "none", marginRight: '20px' }}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab("plants"); }} style={{ color: "white", fontSize: "30px", textDecoration: "none", marginRight: '20px' }}>
               Plants
             </a>
-            <a href="#" onClick={(e) => { e.preventDefault(); }} style={{ color: "white", fontSize: "30px", textDecoration: "none" }}>
+            <a href="#" onClick={(e) => { e.preventDefault(); setActiveTab("tools"); }} style={{ color: "white", fontSize: "30px", textDecoration: "none" }}>
               Tools
             </a>
           </div>
@@ -198,7 +198,7 @@ function ProductList() {
                   <circle cx="184" cy="216" r="12"></circle>
                   <path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"></path>
                 </svg>
-                {totalItemsInCart > 0 && <span className="item-count">{totalItemsInCart}</span>}
+                {totalItemsInCart > 0 && <span className="cart-count">{totalItemsInCart}</span>}
               </div>
             </a>
           </div>
@@ -206,7 +206,7 @@ function ProductList() {
       </div>
 
       <div className="product-list">
-        {plantsArray.map((category) => (
+        {activeTab === "plants" && plantsArray.map((category) => (
           <div key={category.category}>
             <h2 className="plant_heading">{category.category}</h2>
             <div className="product-list">
@@ -229,27 +229,28 @@ function ProductList() {
           </div>
         ))}
 
-        {/* Tools Section */}
-        <div>
-          <h2 className="plant_heading">Tools</h2>
-          <div className="product-list">
-            {toolsArray.map((tool) => (
-              <div className="product-card" key={tool.name}>
-                <img className="product-image" src={tool.image} alt={tool.name} />
-                <h3 className="product-title">{tool.name}</h3>
-                <p className="product-description">{tool.description}</p>
-                <p className="product-price">{tool.cost}</p>
-                <button
-                  className={`product-button ${tool.added ? 'added' : ''}`}
-                  onClick={() => handleAddToCart(toolsArray, toolsArray.indexOf(tool))}
-                  disabled={tool.added}
-                >
-                  {tool.added ? 'Added to Cart' : 'Add to Cart'}
-                </button>
-              </div>
-            ))}
+        {activeTab === "tools" && (
+          <div>
+            <h2 className="plant_heading">Tools</h2>
+            <div className="product-list">
+              {toolsArray.map((tool) => (
+                <div className="product-card" key={tool.name}>
+                  <img className="product-image" src={tool.image} alt={tool.name} />
+                  <h3 className="product-title">{tool.name}</h3>
+                  <p className="product-description">{tool.description}</p>
+                  <p className="product-price">{tool.cost}</p>
+                  <button
+                    className={`product-button ${tool.added ? 'added' : ''}`}
+                    onClick={() => handleAddToCart(toolsArray, toolsArray.indexOf(tool))}
+                    disabled={tool.added}
+                  >
+                    {tool.added ? 'Added to Cart' : 'Add to Cart'}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
       </div>
       {showCart && (
         <CartItem
