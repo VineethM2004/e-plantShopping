@@ -84,35 +84,35 @@ function ProductList() {
   const [toolsArray, setToolsArray] = useState([
     {
       name: "Garden Spade",
-      image: "https://example.com/garden-spade.jpg", // Replace with actual image URLs
+      image: "https://cdn.pixabay.com/photo/2017/06/05/18/34/garden-tools-2375795_1280.jpg", // Updated example URL
       description: "Perfect for digging and planting.",
       cost: "$25",
       added: false,
     },
     {
       name: "Pruning Shears",
-      image: "https://example.com/pruning-shears.jpg", // Replace with actual image URLs
+      image: "https://cdn.pixabay.com/photo/2015/04/19/08/13/pruning-shears-731559_1280.jpg", // Updated example URL
       description: "Ideal for trimming and shaping plants.",
       cost: "$20",
       added: false,
     },
     {
       name: "Garden Hose",
-      image: "https://example.com/garden-hose.jpg", // Replace with actual image URLs
+      image: "https://cdn.pixabay.com/photo/2015/04/19/08/16/garden-hose-731568_1280.jpg", // Updated example URL
       description: "Durable and flexible for all your watering needs.",
       cost: "$30",
       added: false,
     },
     {
       name: "Rake",
-      image: "https://example.com/rake.jpg", // Replace with actual image URLs
+      image: "https://cdn.pixabay.com/photo/2016/04/20/18/12/rake-1331437_1280.jpg", // Updated example URL
       description: "Great for leveling soil and gathering debris.",
       cost: "$18",
       added: false,
     },
     {
       name: "Trowel",
-      image: "https://example.com/trowel.jpg", // Replace with actual image URLs
+      image: "https://cdn.pixabay.com/photo/2016/04/20/18/09/trowel-1331431_1280.jpg", // Updated example URL
       description: "Essential for planting and transplanting.",
       cost: "$10",
       added: false,
@@ -182,8 +182,11 @@ function ProductList() {
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "1100px" }}>
           <div>
-            <a href="#" onClick={(e) => { e.preventDefault(); }} style={{ color: "white", fontSize: "30px", textDecoration: "none" }}>
+            <a href="#" onClick={(e) => { e.preventDefault(); }} style={{ color: "white", fontSize: "30px", textDecoration: "none", marginRight: '20px' }}>
               Plants
+            </a>
+            <a href="#" onClick={(e) => { e.preventDefault(); }} style={{ color: "white", fontSize: "30px", textDecoration: "none" }}>
+              Tools
             </a>
           </div>
           <div>
@@ -201,7 +204,8 @@ function ProductList() {
           </div>
         </div>
       </div>
-      <div className="product-grid">
+
+      <div className="product-list">
         {plantsArray.map((category) => (
           <div key={category.category}>
             <h2 className="plant_heading">{category.category}</h2>
